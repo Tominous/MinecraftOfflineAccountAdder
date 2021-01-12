@@ -76,25 +76,25 @@ public class MinecraftOfflineAccountAdder {
 			}
 
 			// LAUNCHER PROFILES FORMAT
-			//{
-			//   "authenticationDatabase":{
-			//      "MinecraftName":{ <-- Selected Username
-			//         "profiles":{
-			//            "abcdefghijklmnopqrstuvwxyz012345":{ <-- Random UUID
-			//               "displayName":"MinecraftName" <-- Selected Username
-			//            }
-			//         },
-			//         "properties":[],
-			//         "username":"MinecraftName" <-- Selected Username
-			//      }
-			//   },
-			//   "selectedUser":{
-			//      "account":"MinecraftName", <-- Selected Username
-			//      "profile":"abcdefghijklmnopqrstuvwxyz012345" <-- Random UUID
-			//   }
-			//}
+			{
+			   "authenticationDatabase":{
+			      "MinecraftName":{ <-- Selected Username
+			         "profiles":{
+			            "abcdefghijklmnopqrstuvwxyz012345":{ <-- Random UUID
+			               "displayName":"MinecraftName" <-- Selected Username
+			            }
+			         },
+			         "properties":[],
+			         "username":"MinecraftName" <-- Selected Username
+			      }
+			   },
+			   "selectedUser":{
+			      "account":"MinecraftName", <-- Selected Username
+			      "profile":"abcdefghijklmnopqrstuvwxyz012345" <-- Random UUID
+			   }
+			}
 
-			// "authenticationDatabase":{
+			 "authenticationDatabase":{
 			JsonObject authenticationDatabaseObject;
 			if (fileObject.has("authenticationDatabase")) {
 				authenticationDatabaseObject = fileObject.get("authenticationDatabase").getAsJsonObject();
@@ -103,34 +103,34 @@ public class MinecraftOfflineAccountAdder {
 				fileObject.add("authenticationDatabase", authenticationDatabaseObject);
 			}
 
-			    // "MinecraftName":{
+			     "MinecraftName":{
 				JsonObject usernameObject = new JsonObject();
 				authenticationDatabaseObject.add(chosenUsername, usernameObject);
 
-					// "profiles":{
+					 "profiles":{
 					JsonObject profilesObject = new JsonObject();
 					usernameObject.add("profiles", profilesObject);
 
-						// "abcdefghijklmnopqrstuvwxyz012345":{
+						 "abcdefghijklmnopqrstuvwxyz012345":{
 						String randomAccountUUID = UUID.randomUUID().toString().replaceAll("-", "");
 						JsonObject randomUUIDObject = new JsonObject();
 						profilesObject.add(randomAccountUUID, randomUUIDObject);
 
-							// "displayName":"MinecraftName"
+							 "displayName":"MinecraftName"
 							randomUUIDObject.addProperty("displayName", chosenUsername);
 
-					// "properties":[],
+					 "properties":[],
 					usernameObject.add("properties", new JsonArray());
-					// "username":"MinecraftName"
+					 "username":"MinecraftName"
 					usernameObject.addProperty("username", chosenUsername);
 
-			// "selectedUser":{
+			 "selectedUser":{
 			JsonObject selectedUserObject = new JsonObject();
 			fileObject.add("selectedUser", selectedUserObject);
 
-				// "account":"MinecraftName",
+				 "account":"MinecraftName",
 				selectedUserObject.addProperty("account", chosenUsername);
-				// "profile":"abcdefghijklmnopqrstuvwxyz012345"
+				 "profile":"abcdefghijklmnopqrstuvwxyz012345"
 				selectedUserObject.addProperty("profile", randomAccountUUID);
 
 			String jsonString = fileObject.toString();
